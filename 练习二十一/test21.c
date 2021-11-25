@@ -49,6 +49,43 @@ void LastOrder(BTNode* root)
 	printf("%c ", root->data);
 
 }
+
+void TreeSize(BTNode* root,int *size)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+
+	++(*size);
+	TreeSize(root->left,size);
+	TreeSize(root->right,size);
+	 
+
+}
+//求结点数量
+int TreeSizeNode(BTNode* root)
+{
+	return root == NULL ? 0 : TreeSizeNode(root->right) + TreeSizeNode(root->left) + 1;
+}
+//求叶子结点的数量
+int TreeLeafSize(BTNode* root)
+{
+	if (root == NULL)
+	{
+		return 0;
+	}
+	if (root->left == NULL && root->right == NULL)
+	{
+		return 1;
+	}
+	return TreeLeafSize(root->right) + TreeLeafSize(root->left);
+}
+//层序遍历 广度遍历
+void levelOrder(BTNode* root)
+{
+
+}
 int main()
 {
 	BTNode* A = (BTNode*)malloc(sizeof(BTNode));
@@ -87,6 +124,11 @@ int main()
 	printf("\n");
 	LastOrder(A);
 	printf("\n");
+
+	int Asize =0 ;
+	TreeSize(A, &Asize);
+	printf("%d",Asize);
+
 
 
 	return 0;
